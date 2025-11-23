@@ -1,6 +1,7 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import Layout from '../layout/layout';
 import MainScreen from '../../pages/main-screen/main-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
@@ -18,32 +19,40 @@ function App({placeCount} : AppScreenProps): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<MainScreen placeCount={placeCount}/>}
-          />
-          <Route
-            path={AppRoute.Login}
-            element={<AuthScreen />}
-          />
-          <Route
-            path={AppRoute.Offer}
-            element={<OfferScreen />}
-          />
-          <Route
-            path="*"
-            element={<NotFoundScreen />}
-          />
-          <Route
-            path={AppRoute.Favorites}
-            element = {
-              <PrivateRoute
+          <Route path="/"
+            element={
+              <Layout
                 authorizationStatus={AuthorizationStatus.NoAuth}
-              >
-                <FavoritesScreen />
-              </PrivateRoute>
+              />
             }
-          />
+          >
+            <Route
+              path={AppRoute.Main}
+              element={<MainScreen placeCount={placeCount}/>}
+            />
+            <Route
+              path={AppRoute.Login}
+              element={<AuthScreen />}
+            />
+            <Route
+              path={AppRoute.Offer}
+              element={<OfferScreen />}
+            />
+            <Route
+              path="*"
+              element={<NotFoundScreen />}
+            />
+            <Route
+              path={AppRoute.Favorites}
+              element = {
+                <PrivateRoute
+                  authorizationStatus={AuthorizationStatus.NoAuth}
+                >
+                  <FavoritesScreen />
+                </PrivateRoute>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
