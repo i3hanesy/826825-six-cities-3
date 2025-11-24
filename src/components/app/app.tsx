@@ -21,7 +21,7 @@ function App({placeCount} : AppScreenProps): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/"
+          <Route path={AppRoute.Main}
             element={
               <Layout
                 authorizationStatus={statusAuthorisation}
