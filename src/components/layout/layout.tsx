@@ -1,7 +1,6 @@
 import {Outlet} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import Auth from '../header/header-auth';
-import NoAuth from '../header/header-no-auth';
+import Navigate from '../navigate/navigate';
 import {AuthorizationStatus} from '../../const';
 
 type LayoutProps = {
@@ -18,13 +17,7 @@ function Layout(props: LayoutProps): JSX.Element {
             <div className="header__left">
               <Logo />
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                {authorizationStatus === AuthorizationStatus.Auth
-                  ? <Auth />
-                  : <NoAuth />}
-              </ul>
-            </nav>
+            <Navigate authorizationStatus = {authorizationStatus}/>
           </div>
         </div>
       </header>

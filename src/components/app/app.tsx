@@ -8,7 +8,6 @@ import AuthScreen from '../../pages/auth-screen/auth-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import PublicRoute from '../public-route/public-route';
 
 type AppScreenProps = {
   placeCount: number;
@@ -49,14 +48,7 @@ function App({placeCount} : AppScreenProps): JSX.Element {
           </Route>
           <Route
             path={AppRoute.Login}
-            element = {
-              <PublicRoute
-                authorizationStatus={statusAuthorisation}
-              >
-                <AuthScreen />
-              </PublicRoute>
-
-            }
+            element = {<AuthScreen />}
           />
           <Route
             path="*"
