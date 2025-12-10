@@ -9,7 +9,7 @@ type OffersListProps = {
 
 function CardsList({listClassName, offers} : OffersListProps): JSX.Element {
 
-  const [, setCurrentOffer] = useState({});
+  const [, setCurrentOffer] = useState('');
 
   return (
     <div className={listClassName}>

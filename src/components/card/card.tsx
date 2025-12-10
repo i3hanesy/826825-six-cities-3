@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 type CardListProps = {
   offer: Offer;
-  setCurrentOffer: (value: Offer | null) => void;
+  setCurrentOffer: (value: string) => void;
 }
 
 function Card({offer, setCurrentOffer}: CardListProps) : JSX.Element {
@@ -17,8 +17,8 @@ function Card({offer, setCurrentOffer}: CardListProps) : JSX.Element {
   const bookMarks = isFavorite ? 'In bookmarks' : 'To bookmarks';
   return (
     <article
-      onMouseOver = {() => setCurrentOffer(offer)}
-      onMouseLeave = {() => setCurrentOffer(null)}
+      onMouseOver = {() => setCurrentOffer('id')}
+      onMouseLeave = {() => setCurrentOffer('')}
       className={classnames(articleClassName,'place-card')}
     >
       {isPremium &&
