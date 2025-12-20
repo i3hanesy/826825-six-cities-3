@@ -1,10 +1,10 @@
 import {AuthorizationStatus} from '../../const';
 
-type NavigteProps = {
+type HeaderNavigateProps = {
   authorizationStatus: AuthorizationStatus;
 }
 
-function Navigate(props: NavigteProps): JSX.Element {
+function HeaderNavigate(props: HeaderNavigateProps): JSX.Element {
   const {authorizationStatus} = props;
   return (
     <nav className="header__nav">
@@ -30,4 +30,4 @@ function Navigate(props: NavigteProps): JSX.Element {
   );
 }
 
-export default Navigate;
+export default HeaderNavigate;

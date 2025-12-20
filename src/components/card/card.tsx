@@ -1,20 +1,18 @@
 import {Offer} from '../../types/offer';
 import classnames from 'classnames';
-import {useLocation} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 type CardListProps = {
   offer: Offer;
+  articleClassName: string;
+  imageWrapperClassName: string;
   setCurrentOffer: (value: string) => void;
 }
 
-function Card({offer, setCurrentOffer}: CardListProps) : JSX.Element {
-  const location = useLocation();
+function Card({offer, articleClassName, imageWrapperClassName, setCurrentOffer}: CardListProps) : JSX.Element {
   const {previewImage, price, isFavorite, isPremium, type, title, id} = offer;
-  const articleClassName = location.pathname === '/favorites' ? 'favorites__card' : 'cities__card';
-  const imageWrapperClassName = location.pathname === '/favorites' ? 'favorites__image-wrapper' : 'cities__image-wrapper';
-
   const bookMarks = isFavorite ? 'In bookmarks' : 'To bookmarks';
+
   return (
     <article
       onMouseOver = {() => setCurrentOffer('id')}
