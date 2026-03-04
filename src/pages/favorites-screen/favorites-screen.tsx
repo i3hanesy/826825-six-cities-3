@@ -22,7 +22,7 @@ function FavoritesScreen({offers} : FavoritesScreenProps) : JSX.Element {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {favoritesCitys.map((cityName, index) => {
-                const favoritesOffersByCity:Offers = offers.
+                const favoritesOffersByCity:Offers = favoritesOffers.
                   filter(({city}) => city.name === cityName);
                 return (
                   <li

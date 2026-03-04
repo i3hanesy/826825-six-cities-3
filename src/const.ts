@@ -21,3 +21,9 @@ export enum DateFormat {
   Human = 'MMMM yyyy',
   Data = 'yyyy-MM-dd',
 }
+
+export enum Page {
+  Main = 'cities',
+  Favorites = 'favorites',
+  Offer = 'near-places'
+}

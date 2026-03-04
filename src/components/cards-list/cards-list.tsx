@@ -1,39 +1,7 @@
-import {Fragment} from 'react';
-import {AppRoute} from '../../const';
-import CardMain from '../card/card-main';
-import CardFavorites from '../card/card-favorites';
-import CardNear from '../card/card-near';
-import {Offers, Offer} from '../../types/offer';
-
-type CardComponentProps = {
-  location: string;
-  offer: Offer;
-  setCurrentOffer?: (value: string) => void;
-
-}
-
-const getComponentByLocation = ({location, offer, setCurrentOffer}: CardComponentProps) => {
-  switch (location) {
-    case AppRoute.Main:
-      return (
-        <CardMain
-          offer={offer}
-          setCurrentOffer={setCurrentOffer}
-        />);
-    case AppRoute.Favorites:
-      return (
-        <CardFavorites
-          offer={offer}
-        />);
-  }
-  return (
-    <CardNear
-      offer={offer}
-      setCurrentOffer={setCurrentOffer}
-    />);
-};
-
 import {useLocation} from 'react-router-dom';
+import {AppRoute, Page} from '../../const';
+import {Offers} from '../../types/offer';
+import Card from '../card/card';
 
 type OffersListProps = {
   listClassName: string;
@@ -41,15 +9,27 @@ type OffersListProps = {
   setCurrentOffer?: (value: string) => void;
 }
 
+const getLocation = (locationName: string) => {
+  switch (locationName) {
+    case AppRoute.Main:
+      return Page.Main;
+    case AppRoute.Favorites:
+      return Page.Favorites;
+  }
+  return Page.Offer;
+};
+
 function CardsList({listClassName, offers, setCurrentOffer} : OffersListProps): JSX.Element {
-  const location = useLocation().pathname;
+  const location = useLocation();
 
   return (
     <div className={listClassName}>
       {offers.map((offer) => (
-        <Fragment key={offer.id}>
-          {getComponentByLocation({location, offer, setCurrentOffer})}
-        </Fragment>
+        <Card key={offer.id}
+          offer={offer}
+          setCurrentOffer={setCurrentOffer}
+          page = {getLocation(location.pathname)}
+        />
       ))}
     </div>
   );
