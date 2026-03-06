@@ -9,10 +9,11 @@ type CardListProps = {
   imageWrapperClassName: string;
   imgHeight: string;
   imgWidth: string;
+  cardsPlace: string;
   setCurrentOffer?: (value: string) => void;
 }
 
-function Card({offer, articleClassName, imageWrapperClassName, setCurrentOffer, imgWidth, imgHeight}: CardListProps) : JSX.Element {
+function Card({offer, articleClassName, imageWrapperClassName, cardsPlace, setCurrentOffer, imgWidth, imgHeight}: CardListProps) : JSX.Element {
   const {previewImage, price, isFavorite, isPremium, type, title, id, rating} = offer;
   const bookMarks = isFavorite ? 'In bookmarks' : 'To bookmarks';
 

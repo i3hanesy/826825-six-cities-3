@@ -145,6 +145,7 @@ function OfferScreen({comments, offers, onComment} : OfferScreenProps): JSX.Elem
               listClassName={offersListClassName}
               offers={nearOffers}
               setCurrentOffer={setCurrentOffer}
+              cardsPlace={'nearList'}
             />
           </section>
         </div>
