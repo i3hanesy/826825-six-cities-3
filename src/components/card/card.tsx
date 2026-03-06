@@ -5,15 +5,11 @@ import Rating from '../rating/rating';
 
 type CardListProps = {
   offer: Offer;
-  articleClassName: string;
-  imageWrapperClassName: string;
-  imgHeight: string;
-  imgWidth: string;
-  cardsPlace: string;
+  page: string;
   setCurrentOffer?: (value: string) => void;
 }
 
-function Card({offer, articleClassName, imageWrapperClassName, cardsPlace, setCurrentOffer, imgWidth, imgHeight}: CardListProps) : JSX.Element {
+function Card({offer, page, setCurrentOffer}: CardListProps) : JSX.Element {
   const {previewImage, price, isFavorite, isPremium, type, title, id, rating} = offer;
   const bookMarks = isFavorite ? 'In bookmarks' : 'To bookmarks';
 
@@ -21,24 +17,24 @@ function Card({offer, articleClassName, imageWrapperClassName, cardsPlace, setCu
     <article
       onMouseOver = {() => setCurrentOffer?.(id)}
       onMouseLeave = {() => setCurrentOffer?.('')}
-      className={classnames(articleClassName,'place-card')}
+      className = {`${page}__card place-card`}
     >
       {isPremium &&
       <div className="place-card__mark">
         <span>Premium</span>
       </div>}
-      <div className={classnames(imageWrapperClassName,'place-card__image-wrapper')}>
+      <div className={`${page}__image-wrapper place-card__image-wrapper`}>
         <Link to={{pathname: `/offer/${id}`}} state={offer}>
           <img
             className="place-card__image"
             src={previewImage}
-            width={imgWidth}
-            height={imgHeight}
+            width={page === 'favorites' ? 150 : 260}
+            height={page === 'favorites' ? 110 : 200}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={classnames({'favorites__card-info':location.pathname === '/favorites'}, 'place-card__info')}>
+      <div className={classnames({'favorites__card-info': page === 'favorites'}, 'place-card__info')}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
