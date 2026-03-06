@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Helmet} from 'react-helmet-async';
 import CardsList from '../../components/cards-list/cards-list';
 import {Offers, Offer} from '../../types/offer';
-import {Page} from '../../const';
+import {PAGES} from '../../const';
 import Map from '../../components/map/map';
 
 type MainScreenProps = {
@@ -85,7 +85,7 @@ function MainScreen({placeCount, offers} : MainScreenProps): JSX.Element {
                 listClassName={offersListClassName}
                 offers={offersByCity}
                 setCurrentOffer={setCurrentOffer}
-                page={Page.Main}
+                page={PAGES.main}
               />
             </section>
             <div className="cities__right-section">

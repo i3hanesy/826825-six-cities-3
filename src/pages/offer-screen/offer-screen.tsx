@@ -5,7 +5,7 @@ import {Comments} from '../../types/comment';
 import {Offers} from '../../types/offer';
 import {Offer} from '../../types/offer';
 import {Review} from '../../types/comment';
-import {Page, Setting} from '../../const';
+import {PAGES, Setting} from '../../const';
 import CardsList from '../../components/cards-list/cards-list';
 import Rating from '../../components/rating/rating';
 import Map from '../../components/map/map';
@@ -146,8 +146,7 @@ function OfferScreen({comments, offers, onComment} : OfferScreenProps): JSX.Elem
               listClassName={offersListClassName}
               offers={nearOffers}
               setCurrentOffer={setCurrentOffer}
-              cardsPlace={'nearList'}
-              page={Page.Offer}
+              page={PAGES.offer}
             />
           </section>
         </div>

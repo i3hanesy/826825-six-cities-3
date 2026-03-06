@@ -6,12 +6,13 @@ export const Setting = {
   ratingWidthModifier: 20,
   maxNearOfferCount: 3,
 };
+
 export const IMAGE_SETTINGS = {
   width: 260,
   height: 200,
   favoriteWidth: 150,
   favoriteHeight: 110
-}
+};
 
 export enum AppRoute {
   Login = '/login',
@@ -31,11 +32,12 @@ export enum DateFormat {
   Data = 'yyyy-MM-dd',
 }
 
-export enum Page {
-  Main = 'cities',
-  Favorites = 'favorites',
-  Offer = 'near-places'
-}
+
+export const PAGES = {
+  main: 'cities',
+  favorites: 'favorites',
+  offer: 'near-places'
+};
 
 export const CITIES: OfferCity[] = [
   {

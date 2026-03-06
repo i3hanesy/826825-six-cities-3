@@ -2,7 +2,7 @@ import {Offer} from '../../types/offer';
 import classnames from 'classnames';
 import {Link} from 'react-router-dom';
 import Rating from '../rating/rating';
-import {IMAGE_SETTINGS, Page} from '../../const'; 
+import {IMAGE_SETTINGS, PAGES} from '../../const';
 
 type CardListProps = {
   offer: Offer;
@@ -13,7 +13,6 @@ type CardListProps = {
 function Card({offer, page, setCurrentOffer}: CardListProps) : JSX.Element {
   const {previewImage, price, isFavorite, isPremium, type, title, id, rating} = offer;
   const bookMarks = isFavorite ? 'In bookmarks' : 'To bookmarks';
-
   return (
     <article
       onMouseOver = {() => setCurrentOffer?.(id)}
@@ -29,8 +28,8 @@ function Card({offer, page, setCurrentOffer}: CardListProps) : JSX.Element {
           <img
             className="place-card__image"
             src={previewImage}
-            width={page === Page.Favorites ? IMAGE_SETTINGS.favoriteWidth : IMAGE_SETTINGS.width}
-            height={page === Page.Favorites ? IMAGE_SETTINGS.favoriteHeight : IMAGE_SETTINGS.height}
+            width={page === PAGES.favorites ? IMAGE_SETTINGS.favoriteWidth : IMAGE_SETTINGS.width}
+            height={page === PAGES.favorites ? IMAGE_SETTINGS.favoriteHeight : IMAGE_SETTINGS.height}
             alt="Place image"
           />
         </Link>
