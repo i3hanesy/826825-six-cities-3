@@ -44,8 +44,9 @@ function Map({offers, currentCity, currentOffer, mapClassName}:MapProps) : JSX.E
           })
           .addTo(map);
       });
+      map.setView(new leaflet.LatLng(currentCityLocation.latitude, currentCityLocation.longitude));
     }
-  }, [currentCustomIcon, defaultCustomIcon, map, offers, currentOffer]);
+  }, [currentCustomIcon, defaultCustomIcon, map, offers, currentOffer, currentCityLocation]);
 
   return (
     <section
