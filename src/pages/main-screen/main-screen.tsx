@@ -1,4 +1,4 @@
-import {useState} from 'react';
+// import {useState} from 'react';
 import {Helmet} from 'react-helmet-async';
 import CardsList from '../../components/cards-list/cards-list';
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
@@ -13,7 +13,7 @@ type MainScreenProps = {
 const offersListClassName: string = 'cities__places-list places__list tabs__content';
 
 function MainScreen({placeCount,} : MainScreenProps): JSX.Element {
-  const [currentOffer, setCurrentOffer] = useState('');
+  // const [currentOffer, setCurrentOffer] = useState('');
   const offersByCity = useAppSelector((state) => state.offersList);
   const currentCity = useAppSelector((state) => state.currentCity);
 
@@ -48,7 +48,7 @@ function MainScreen({placeCount,} : MainScreenProps): JSX.Element {
               <CardsList
                 listClassName={offersListClassName}
                 offers={offersByCity}
-                setCurrentOffer={setCurrentOffer}
+                // setCurrentOffer={setCurrentOffer}
                 page={PAGES.main}
               />
             </section>
@@ -56,7 +56,7 @@ function MainScreen({placeCount,} : MainScreenProps): JSX.Element {
               <Map
                 offers={offersByCity}
                 currentCity={currentCity}
-                currentOffer={currentOffer}
+                // currentOffer={currentOffer}
                 mapClassName='cities__map map'
               />
             </div>
