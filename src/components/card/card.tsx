@@ -1,5 +1,5 @@
 import {Offer} from '../../types/offer';
-import {useCallback} from 'react';
+import {useCallback, MouseEventHandler} from 'react';
 import classnames from 'classnames';
 import Rating from '../rating/rating';
 import { useAppDispatch} from '../../hooks/index';
@@ -12,13 +12,14 @@ import CardTitle from './card-title';
 type CardProps = {
   offer: Offer;
   bemBlock: string | undefined;
+  onCardHover: (id: string | '') => MouseEventHandler<HTMLElement> 
 }
 
-function Card({offer, bemBlock}: CardProps) : JSX.Element {
+function Card({offer, bemBlock, onCardHover}: CardProps) : JSX.Element {
   const {price, isFavorite, isPremium, type, id, rating} = offer;
   const dispatch = useAppDispatch();
 
-  const onCardHover = useCallback((offerId: string) => () => dispatch(setMapCurrentOffer(offerId)),[dispatch]);
+  // const onCardHover = useCallback((offerId: string) => () => dispatch(setMapCurrentOffer(offerId)),[dispatch]);
 
   return (
     <article
