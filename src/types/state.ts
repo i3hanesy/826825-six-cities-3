@@ -27,6 +27,8 @@ export type FavoriteData = {
 
 export type ReviewsData = {
   reviews: Comments;
+  isLoading: boolean;
+  hasError: boolean;
 }
 
 export type MainProcess = {
