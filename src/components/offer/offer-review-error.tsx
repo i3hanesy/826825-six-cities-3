@@ -1,18 +1,25 @@
 import {useState, useEffect} from 'react';
 
 function OfferReviwError(): JSX.Element {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
+   useEffect(() => {
     setTimeout(() => {
       setIsVisible(false);
-    }, 300000); // 3 секунды в миллисекундах
-  },); // массив зависимостей пуст, эффект сработает однократно
+    }, 3000); // 3 секунды в миллисекундах
+  },);
+
+//   const handleClick = () => {
+//     setIsVisible(true);
+    // setTimeout(() => {
+    //   setIsVisible(false);
+    // }, 3000); // 3 секунды в миллисекундах
+//   };
 
   return (
-     <div>
-      {isVisible ? <div>Компонент исчезнет через 3 секунды</div> : null}
-    </div>
+    <>
+      {isVisible && <p>Не удалось отправить комментарий</p>}
+    </>
   );
 }
 
