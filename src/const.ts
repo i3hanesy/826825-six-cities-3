@@ -8,6 +8,8 @@ export const Setting = {
   minReviewLength: 50
 };
 
+export const showErrorTime = 2000;
+
 export const IMAGE_SETTINGS = {
   width: 260,
   height: 200,

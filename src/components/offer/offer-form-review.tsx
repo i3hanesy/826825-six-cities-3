@@ -1,11 +1,12 @@
 import {useState, Fragment, FormEvent, ChangeEvent, memo, useEffect} from 'react';
-import { Setting } from '../../const';
+import { Setting, showErrorTime } from '../../const';
 import { reviewAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
 import { AuthorizationStatus } from '../../const';
 import {getLoadStatus, getErrorStatus} from '../../store/reviews-data/review-selectors';
-import OfferReviwError from './offer-review-error';
+import './offer-form-error.css';
+// import OfferReviwError from './offer-review-error';
 
 const ratingTitles:string[] = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
@@ -20,11 +21,21 @@ function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string
     rating: '',
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isErrorVisible, setIsErrorVisible] = useState(false);
 
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isLoading = useAppSelector(getLoadStatus);
   const hasError = useAppSelector(getErrorStatus);
+
+  useEffect(() => {
+    if(hasError) {
+      setIsErrorVisible(true);
+      setTimeout(() => {
+        setIsErrorVisible(false);
+      }, showErrorTime);
+    }
+  },[hasError]);
 
   useEffect(() => {
     if (formData.review.length >= Setting.minReviewLength && formData.review.length <= Setting.maxReviewLength && formData.rating !== '') {
@@ -105,7 +116,7 @@ function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={isButtonDisabled} >Submit</button>
       </div>
-      {hasError && <OfferReviwError/>}
+      {isErrorVisible && <p className='reviews__form--error'>Не удалось отправить комментарий</p>}
     </form>
   );
 
