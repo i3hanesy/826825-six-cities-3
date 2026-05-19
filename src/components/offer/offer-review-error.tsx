@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import './offer-form-error.css';
 
 function OfferReviwError(): JSX.Element {
   const [isVisible, setIsVisible] = useState(true);
@@ -6,19 +7,14 @@ function OfferReviwError(): JSX.Element {
    useEffect(() => {
     setTimeout(() => {
       setIsVisible(false);
-    }, 3000); // 3 секунды в миллисекундах
+    }, 2000); // 2 секунды в миллисекундах
   },);
-
-//   const handleClick = () => {
-//     setIsVisible(true);
-    // setTimeout(() => {
-    //   setIsVisible(false);
-    // }, 3000); // 3 секунды в миллисекундах
-//   };
 
   return (
     <>
-      {isVisible && <p>Не удалось отправить комментарий</p>}
+      {isVisible && <div className='reviews__form--error'>
+        <p>Не удалось отправить комментарий</p>
+      </div>}
     </>
   );
 }

@@ -19,20 +19,20 @@ function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string
     review: '',
     rating: '',
   });
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isLoading = useAppSelector(getLoadStatus);
   const hasError = useAppSelector(getErrorStatus);
 
-  // useEffect(() => {
-  //   if (formData.review.length >= Setting.minReviewLength && formData.review.length <= Setting.maxReviewLength && formData.rating !== '') {
-  //     setIsButtonDisabled(false);
-  //   } else {
-  //     setIsButtonDisabled(true);
-  //   }
-  // }, [formData]);
+  useEffect(() => {
+    if (formData.review.length >= Setting.minReviewLength && formData.review.length <= Setting.maxReviewLength && formData.rating !== '') {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [formData]);
 
   useEffect(() => {
     if (!isLoading && !hasError) {
@@ -63,17 +63,11 @@ function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string
     return '';
   }
 
-  // if (hasError) {
-  //   <OfferReviwError/>
-  //   return;
-  // }
-
   return (
     <form
       onSubmit={handleFormSubmit}
       className="reviews__form form" action="#" method="post"
     >
-      <OfferReviwError/>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {ratingTitles.map((title, index)=>(
@@ -111,6 +105,7 @@ function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={isButtonDisabled} >Submit</button>
       </div>
+      {hasError && <OfferReviwError/>}
     </form>
   );
 
