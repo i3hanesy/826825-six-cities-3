@@ -1,9 +1,12 @@
-import {useState, Fragment, FormEvent, memo} from 'react';
-import { Setting } from '../../const';
+import {useState, Fragment, FormEvent, ChangeEvent, memo, useEffect} from 'react';
+import { Setting, showErrorTime } from '../../const';
 import { reviewAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
 import { AuthorizationStatus } from '../../const';
+import {getLoadStatus, getErrorStatus} from '../../store/reviews-data/review-selectors';
+import './offer-form-error.css';
+// import OfferReviwError from './offer-review-error';
 
 const ratingTitles:string[] = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
@@ -13,21 +16,58 @@ type OfferFormReviewProps = {
 
 
 function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string {
-  const [text, setText] = useState('');
-  const [rating, setRating] = useState('1');
+  const [formData, setFormData] = useState({
+    review: '',
+    rating: '',
+  });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isErrorVisible, setIsErrorVisible] = useState(false);
 
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isLoading = useAppSelector(getLoadStatus);
+  const hasError = useAppSelector(getErrorStatus);
+
+  useEffect(() => {
+    if(hasError) {
+      setIsErrorVisible(true);
+      setTimeout(() => {
+        setIsErrorVisible(false);
+      }, showErrorTime);
+    }
+  },[hasError]);
+
+  useEffect(() => {
+    if (formData.review.length >= Setting.minReviewLength && formData.review.length <= Setting.maxReviewLength && formData.rating !== '') {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [formData]);
+
+  useEffect(() => {
+    if (!isLoading && !hasError) {
+      setFormData({
+        review: '',
+        rating: '',
+      });
+    }
+  }, [isLoading, hasError]);
+
+
+  const handleFieldChange = (evt:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const {name, value} = evt.target;
+
+    setFormData({...formData, [name]: value});
+  };
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(reviewAction({
       id: offerId,
-      comment: text,
-      rating: Number(rating),
+      comment: formData.review,
+      rating: Number(formData.rating),
     }));
-    setText('');
-    setRating('1');
   };
 
   if (authorizationStatus !== AuthorizationStatus.Auth) {
@@ -44,13 +84,14 @@ function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string
         {ratingTitles.map((title, index)=>(
           <Fragment key={`${title + index}`}>
             <input
-              onChange={(evt) => setRating(evt.target.value)}
+              onChange={handleFieldChange}
               className="form__rating-input visually-hidden"
               name="rating"
               value={Setting.maxRating - index}
-              checked={(Setting.maxRating - index) === Number(rating)}
+              checked={(Setting.maxRating - index) === Number(formData.rating)}
               id={`${Setting.maxRating - index}-stars`}
               type="radio"
+              disabled = {isLoading}
             />
             <label htmlFor={`${Setting.maxRating - index}-stars`}
               className="reviews__rating-label form__rating-label"
@@ -64,16 +105,18 @@ function OfferFormReview({offerId}: OfferFormReviewProps) : JSX.Element | string
         ))}
       </div>
       <textarea
-        onChange={(evt) => setText(evt.target.value)}
+        onChange={handleFieldChange}
         className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
-        value = {text}
+        value = {formData.review}
+        disabled = {isLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" >Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isButtonDisabled} >Submit</button>
       </div>
+      {isErrorVisible && <p className='reviews__form--error'>Не удалось отправить комментарий</p>}
     </form>
   );
 

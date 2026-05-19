@@ -1,4 +1,5 @@
 import {Offers} from '../../types/offer';
+import {memo} from 'react';
 import Card from '../card/card';
 
 type OffersListProps = {
@@ -20,4 +21,6 @@ function CardsList({offers, bemBlock} : OffersListProps): JSX.Element {
   );
 }
 
-export default CardsList;
+const MemorizedCardsList = memo(CardsList);
+
+export default MemorizedCardsList;

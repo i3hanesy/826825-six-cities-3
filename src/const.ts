@@ -4,15 +4,24 @@ export const Setting = {
   maxRating: 5,
   ratingWidthModifier: 20,
   maxNearOfferCount: 3,
+  maxReviewLength: 300,
+  minReviewLength: 50
 };
 
-// export const TIMEOUT_SHOW_ERROR:number = 2000;
+export const showErrorTime = 2000;
 
 export const IMAGE_SETTINGS = {
   width: 260,
   height: 200,
   favoriteWidth: 150,
   favoriteHeight: 110
+};
+
+export const BOOCMARK_SIZE = {
+  width: '18',
+  height: '19',
+  offerWidth: '31',
+  offerHeight: '33'
 };
 
 export enum AppRoute {

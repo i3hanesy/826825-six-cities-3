@@ -4,7 +4,7 @@ import {Navigate} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import {getAuthorizationStatus} from '../../store/user-process/user-selectors';
 import {favoriteChangeAction} from '../../store/api-actions';
-import {AuthorizationStatus, AppRoute, FavoriteStatus} from '../../const';
+import {AuthorizationStatus, AppRoute, FavoriteStatus, BOOCMARK_SIZE} from '../../const';
 
 type CardBookmarkProps = {
   id: string;
@@ -20,8 +20,8 @@ function CardBookmark({id, isFavorite, bemBlock = 'place-card'}: CardBookmarkPro
 
   const bookMarks = isFavoriteStatus ? 'In bookmarks' : 'To bookmarks';
   const pageClassActive = `${bemBlock}__bookmark-button--active`;
-  const iconWidth = bemBlock === 'offer' ? '31' : '18';
-  const iconHeight = bemBlock === 'offer' ? '33' : '19';
+  const iconWidth = bemBlock === 'offer' ? BOOCMARK_SIZE.offerWidth : BOOCMARK_SIZE.width;
+  const iconHeight = bemBlock === 'offer' ? BOOCMARK_SIZE.offerHeight : BOOCMARK_SIZE.height;
   const dispatch = useAppDispatch();
 
   const handleBookmark = () => {

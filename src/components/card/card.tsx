@@ -1,5 +1,5 @@
 import {Offer} from '../../types/offer';
-import {useCallback} from 'react';
+import {useCallback, memo} from 'react';
 import classnames from 'classnames';
 import Rating from '../rating/rating';
 import { useAppDispatch} from '../../hooks/index';
@@ -60,4 +60,7 @@ function Card({offer, bemBlock}: CardProps) : JSX.Element {
   );
 }
 
-export default Card;
+
+const MemorizedCard = memo(Card);
+
+export default MemorizedCard;
