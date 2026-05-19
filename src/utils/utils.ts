@@ -1,5 +1,5 @@
-import {Offers} from './types/offer';
-import {SortTypes} from './const';
+import {Offers} from './../types/offer';
+import {SortTypes} from './../const';
 
 export const filterByCityOffers = (offers:Offers, cityName:string) => offers.filter(({city}) => city.name === cityName);
 

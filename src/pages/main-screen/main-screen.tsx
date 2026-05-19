@@ -4,7 +4,7 @@ import {memo} from 'react';
 import CardsList from '../../components/cards-list/cards-list';
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
 import Sort from '../../components/sort/sort';
-import { filterByCityOffers, sortOffers } from '../../utils';
+import { filterByCityOffers, sortOffers } from '../../utils/utils';
 import Map from '../../components/map/map';
 import {useAppSelector} from '../../hooks';
 import { getCurrentCity, getSortType} from '../../store/main-process/main-selectors';

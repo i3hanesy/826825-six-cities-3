@@ -6,7 +6,6 @@ import { getAuthorizationStatus } from '../../store/user-process/user-selectors'
 import { AuthorizationStatus } from '../../const';
 import {getLoadStatus, getErrorStatus} from '../../store/reviews-data/review-selectors';
 import './offer-form-error.css';
-// import OfferReviwError from './offer-review-error';
 
 const ratingTitles:string[] = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
