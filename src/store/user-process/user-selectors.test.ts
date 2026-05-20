@@ -1,31 +1,29 @@
 import { NameSpace, AuthorizationStatus } from '../../const';
-import { getAuthorizationStatus, getAuthCheckedStatus, getUserData } from './user-selectors';
-import { makeFakeUserData } from '../../utils/mocks';
+import { getAuthorizationStatus, getAuthCheckedStatus } from './user-selectors';
+import { UserProcess } from '../../types/state';
 
 describe('UserProcess selectors', () => {
-    const mockFakeUserData = makeFakeUserData();
-  const state = {
-    [NameSpace.User]: {
-      authorizationStatus: AuthorizationStatus.Auth,
-      userData: mockFakeUserData,
-    }
-  };
 
-  it('should return authorizationStatus from state', () => {
-    const { authorizationStatus } = state[NameSpace.User];
-    const result = getAuthorizationStatus(state);
+  it('should return authorization status from state', () => {
+    const authorizationStatus = AuthorizationStatus.Auth;
+    const state: UserProcess  = { authorizationStatus};
+    const result = getAuthorizationStatus({ [NameSpace.User]: state });
     expect(result).toBe(authorizationStatus);
   });
 
-  it('should return true from state', () => {
-    // const { authorizationStatus } = state[NameSpace.User];
-    const result = getAuthCheckedStatus(state);
-    expect(result).toEqual(true);
+  it('should return "true" because auth status is "Auth"', () => {
+    const authorizationStatus = AuthorizationStatus.Auth;
+    const state: UserProcess  = { authorizationStatus};
+    
+    const result = getAuthCheckedStatus({ [NameSpace.User]: state });
+    expect(result).toBe(true);
   });
 
-  it('should return userData from state', () => {
-    const { userData } = state[NameSpace.User];
-    const result = getUserData(state);
-    expect(result).toBe(userData);
+  it('should return "false" because auth status is "Unknown"', () => {
+    const authorizationStatus = AuthorizationStatus.Unknown;
+    const state: UserProcess  = { authorizationStatus};
+    
+    const result = getAuthCheckedStatus({ [NameSpace.User]: state });
+    expect(result).toBe(false);
   });
 });

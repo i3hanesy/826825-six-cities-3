@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import {memo} from 'react';
 import {useAppSelector} from '../../hooks';
-import {getUserData} from '../../store/user-process/user-selectors';
+import {getUserData} from '../../store/user-data/user-data-selectors';
 import useFavoriteCount from '../../hooks/use-favorite-count';
 
 function HeaderUser(): JSX.Element {

@@ -5,9 +5,12 @@ import { Comments } from './comment';
 import { OfferCity } from './offer';
 import { UserData } from './user-data';
 
+export type UserDataType = {
+  userData: UserData;
+}
+
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
-  userData: UserData;
 };
 
 export type CurrentOffer = Offer | null;
