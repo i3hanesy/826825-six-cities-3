@@ -16,6 +16,6 @@ export const dataUser = createSlice({
     builder
       .addCase(fetchUserDataAction.fulfilled, (state, action: PayloadAction<UserData>) => {
         state.userData = action.payload;
-      })
+      });
   }
 });

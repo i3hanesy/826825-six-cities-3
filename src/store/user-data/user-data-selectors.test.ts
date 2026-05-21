@@ -13,14 +13,15 @@ describe('UserProcess selectors', () => {
   it('should return userData from state', () => {
     const { userData } = state[NameSpace.DataUser];
     const result = getUserData(state);
-    expect(result).toBe(userData);
+    expect(result).toEqual(userData);
   });
 
   it('should return userData as null', () => {
     const userData = null;
-    const state = {userData};
+    const expectedState = {userData};
 
-    const result = getUserData({ [NameSpace.DataUser]: state });
+    const result = getUserData({ [NameSpace.DataUser]: expectedState });
     expect(result).toEqual(userData);
   });
+
 });

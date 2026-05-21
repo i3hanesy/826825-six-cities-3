@@ -1,12 +1,13 @@
 import {internet, datatype, name, address, image, lorem} from 'faker';
 import { UserData } from '../types/user-data';
+import { Offer } from '../types/offer';
 
 export const makeFakeUserData = (): UserData => ({
-    id: datatype.number(),
-    email: internet.email(),
-    token: datatype.uuid(),
-    avatarUrl: internet.avatar(),
-    isPro: datatype.boolean(),
+  id: datatype.number(),
+  email: internet.email(),
+  token: datatype.uuid(),
+  avatarUrl: internet.avatar(),
+  isPro: datatype.boolean(),
 } as UserData);
 
 export const cardId = datatype.uuid();
@@ -34,40 +35,28 @@ export const fakeImages = Array.from({ length: 10 }, () => image.imageUrl());
 
 export const fakeGoods = Array.from({ length: 5 }, () => lorem.word());
 
-export const fakeCurrentOffer = {
+export const fakeOffer = ():Offer => ({
   id: cardId,
   title: name.title(),
-  type: name.jobType(),
+  type: 'room',
   price: datatype.number(),
   city: fakeCity,
   location: fakeLocation,
-  isFavorite: datatype.boolean(),
+  isFavorite: true,
   isPremium: datatype.boolean(),
   rating: datatype.number(),
+  previewImage: image.imageUrl(),
   description: fakeDescription,
   bedrooms: datatype.number(),
   goods: fakeGoods,
   host: fakeHost,
   images: fakeImages,
   maxAdults: datatype.number(),
-};
-
-export const fakeError = lorem.text();
-
-export const fakeOffer = () => ({
-  id: cardId,
-  title: name.title(),
-  type: name.jobType(),
-  price: datatype.number(),
-  city: fakeCity,
-  location: fakeLocation,
-  isFavorite: datatype.boolean(),
-  isPremium: datatype.boolean(),
-  rating: datatype.number(),
-  previewImage: image.imageUrl(),
 });
 
-export const fakeOffers = Array.from({length: 5}, () => fakeOffer());
+// export const fakeError = lorem.text();
+
+export const fakeOffers = Array.from({length: 6}, () => fakeOffer());
 
 export const fakeReview = () => ({
   id: datatype.uuid(),
@@ -78,11 +67,3 @@ export const fakeReview = () => ({
 });
 
 export const fakeReviews = Array.from({length: 5}, () => fakeReview());
-
-export const fakeUser = {
-  name: name.firstName(),
-  avatarUrl: image.imageUrl(),
-  isPro: datatype.boolean(),
-  email: internet.email(),
-  token: datatype.uuid(),
-};
