@@ -4,7 +4,7 @@ import {SortTypes} from './../const';
 export const filterByCityOffers = (offers:Offers, cityName:string) => offers.filter(({city}) => city.name === cityName);
 
 export const sortOffers = (offers:Offers, sortType:string) => {
-  const popularOffers = offers;
+  const popularOffers = [...offers];
   switch (sortType) {
     case SortTypes.POPULAR:
       return popularOffers;
