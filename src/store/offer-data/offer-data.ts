@@ -57,11 +57,17 @@ export const offerData = createSlice({
 
       .addCase(fetchNearByOfferAction.pending, (state) => {
         state.isOffersDataLoading = true;
+        state.hasError = false;
       })
 
       .addCase(fetchNearByOfferAction.fulfilled, (state, action) => {
         state.nearByOffer = action.payload;
         state.isOffersDataLoading = false;
+      })
+
+      .addCase(fetchNearByOfferAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+        state.hasError = true;
       });
 
   }
