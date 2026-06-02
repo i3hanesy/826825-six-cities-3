@@ -35,6 +35,8 @@ export type Offer = {
   maxAdults: number;
 };
 
+export type ShortOffer = Pick<Offer, 'id' | 'isFavorite'>;
+
 export type FavoriteData = {
   id: string;
   favoriteStatus: number;

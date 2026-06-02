@@ -1,8 +1,7 @@
 import {store} from '../store/index';
 import {AuthorizationStatus, SortTypes} from '../const';
-import { Offers, Offer} from './offer';
+import { Offers, Offer, OfferCity} from './offer';
 import { Comments } from './comment';
-import { OfferCity } from './offer';
 import { UserData } from './user-data';
 
 export type UserDataType = {

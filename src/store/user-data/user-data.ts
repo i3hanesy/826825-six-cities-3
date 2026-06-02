@@ -11,11 +11,19 @@ const initialState: UserDataType = {
 export const dataUser = createSlice({
   name: NameSpace.DataUser,
   initialState,
-  reducers: {},
+  reducers: {
+    dropUserData: (state) => {
+      state.userData = null;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchUserDataAction.fulfilled, (state, action: PayloadAction<UserData>) => {
         state.userData = action.payload;
       });
+
+      
   }
 });
+
+export const {dropUserData} = dataUser.actions;

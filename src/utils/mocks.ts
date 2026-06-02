@@ -1,6 +1,13 @@
-import {internet, datatype, name, address, image, lorem} from 'faker';
+import {internet, datatype, name, address, image, lorem} from 'faker'
 import { UserData } from '../types/user-data';
+import { Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { createAPI } from '../services/api';
 import { Offer } from '../types/offer';
+import { State } from '../types/state';
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
 
 export const makeFakeUserData = (): UserData => ({
   id: datatype.number(),
@@ -54,6 +61,7 @@ export const fakeOffer = ():Offer => ({
   maxAdults: datatype.number(),
 });
 
+
 // export const fakeError = lorem.text();
 
 export const fakeOffers = Array.from({length: 6}, () => fakeOffer());
@@ -65,5 +73,11 @@ export const fakeReview = () => ({
   comment: lorem.paragraph(),
   rating: datatype.number(),
 });
+
+export const mockPostReview = {
+  id: '1',
+  comment: 'Test comment',
+  rating: 4
+}
 
 export const fakeReviews = Array.from({length: 5}, () => fakeReview());

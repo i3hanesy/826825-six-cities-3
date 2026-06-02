@@ -4,36 +4,20 @@ import { fakeOffers, fakeOffer } from '../../utils/mocks';
 
 describe('OfferData Slice', () => {
 
-  //  it('should return offersList with isFavorite flags set to false', () => {
-  //   const mockOffer = fakeOffer();
-  //   const initialStade = {
-  //     offersList: [mockOffer],
-  //     nearByOffer: [],
-  //     currentOffer: null,
-  //     isOffersDataLoading: false,
-  //     hasError: false,
-  //   };
-    
-  //   const expectedOffersList = (mockOffer.isFavorite = false);
-   
-  //   const result = offerData.reducer(initialStade, removeFavorite);
-
-  //   expect(result.offersList).toBe(expectedOffersList);
-  // })
   it('should return offersList with isFavorite flags set to false', () => {
+    const mockOffer = fakeOffer();
     const initialStade = {
-      offersList: [{id: 1, isFavorite: true},{id: 2, isFavorite: true},{id: 3, isFavorite: true}],
+      offersList: [mockOffer],
       nearByOffer: [],
       currentOffer: null,
       isOffersDataLoading: false,
       hasError: false,
     };
-    // const initialOffersList = [{id: 1, isFavorite: true},{id: 2, isFavorite: true},{id: 3, isFavorite: true}];
-    const expectedOffersList = [{id: 1, isFavorite: false},{id: 2, isFavorite: false},{id: 3, isFavorite: false}];
 
     const result = offerData.reducer(initialStade, removeFavorite);
+    mockOffer['isFavorite'] = false
 
-    expect(result.offersList).toEqual(expectedOffersList);
+    expect(result.offersList).toEqual([mockOffer]);
   })
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
@@ -217,7 +201,4 @@ describe('OfferData Slice', () => {
 
     expect(result).toEqual(expectedState);
   });
-
-  
-
 })

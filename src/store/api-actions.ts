@@ -7,6 +7,7 @@ import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData, HeaderUserData} from '../types/user-data';
+import { dropUserData } from './user-data/user-data.js';
 import { Comments, Review, Comment } from '../types/comment';
 import {removeFavorite} from './offer-data/offer-data';
 import {dropFavoriteOffers} from './favorite-data/favorite-data';
@@ -148,6 +149,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    dispatch(dropUserData());
     dispatch(dropFavoriteOffers());
     dispatch(removeFavorite());
   },
