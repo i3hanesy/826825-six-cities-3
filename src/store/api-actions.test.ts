@@ -3,9 +3,9 @@ import { createAPI } from '../services/api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
-import { AppThunkDispatch, extractActionsTypes, makeFakeArtistQuestion, makeFakeGenreQuestion, fakeOffers } from '../utils/mocks';
+import { AppThunkDispatch, extractActionsTypes, fakeOffers } from '../utils/mocks';
 import { State } from '../types/state';
-import { checkAuthAction, fetchQuestionAction, fetchOffersAction, loginAction, logoutAction } from './api-actions';
+import { checkAuthAction, fetchOffersAction, loginAction, logoutAction } from './api-actions';
 import { APIRoute } from '../const';
 import { redirectToRoute } from './action';
 import { AuthData } from '../types/auth-data';
@@ -123,25 +123,20 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         logoutAction.pending.type,
+        dropUserData.type,
+        dropFavoriteOffers.type,
+        removeFavorite.type,
         logoutAction.fulfilled.type,
       ]);
     });
 
     it('should one call "dropToken" with "logoutAction"', async () => {
       mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204);
-    //   const mockDropToken = vi.spyOn(tokenStorage, 'dropToken');
+      const mockDropToken = vi.spyOn(tokenStorage, 'dropToken');
 
       await store.dispatch(logoutAction());
-      const actions = extractActionsTypes(store.getActions());
 
-    //   expect(mockDropToken).toBeCalledTimes(1);
-      expect(actions).toEqual([
-        logoutAction.pending.type,
-        dropUserData.type,
-        dropFavoriteOffers.type,
-        removeFavorite.type,
-        logoutAction.fulfilled.type,
-      ]);
+      expect(mockDropToken).toBeCalledTimes(1);
     });
   });
 });
