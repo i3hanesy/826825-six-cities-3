@@ -8,6 +8,7 @@ import {
 const initialState: FavoriteData = {
   favoriteOffers: [],
   isFavoritesDataLoading: false,
+  hasError: false,
 };
 
 export const favoriteData = createSlice({
@@ -22,11 +23,17 @@ export const favoriteData = createSlice({
     builder
       .addCase(fetchFavoriteOffersAction.pending, (state) => {
         state.isFavoritesDataLoading = true;
+        state.hasError = false;
       })
 
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
         state.isFavoritesDataLoading = false;
+      })
+
+      .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+        state.isFavoritesDataLoading = false;
+        state.hasError = true;
       })
 
       .addCase(favoriteChangeAction.fulfilled, (state, action:PayloadAction<FavoriteCange>) => {

@@ -25,7 +25,7 @@ describe('Async actions', () => {
     store = mockStoreCreator({
       DATA: {
         offersList: [],
-        nearByOffer: []
+        nearByOffer: [],
       },
       FAVORITES: {favoriteOffers: []}
     });
@@ -72,8 +72,7 @@ describe('Async actions', () => {
         fetchOffersAction.fulfilled.type,
       ]);
 
-      expect(fetchOffersActionFulfilled.payload)
-        .toEqual(fakeOffers);
+      expect(fetchOffersActionFulfilled.payload).toEqual(fakeOffers);
     });
 
     it('should dispatch "fetchOffersAction.pending", "fetchOffersAction.rejected" when server response 400', async () => {
@@ -106,8 +105,7 @@ describe('Async actions', () => {
         fetchNearByOfferAction.fulfilled.type,
       ]);
 
-      expect(fetchNearByOfferActionFulfilled.payload)
-        .toEqual(fakeOffers);
+      expect(fetchNearByOfferActionFulfilled.payload).toEqual(fakeOffers);
     });
 
     it('should dispatch "fetchNearByOfferAction.pending", "fetchNearByOfferAction.rejected" when server response 400', async () => {
@@ -160,7 +158,7 @@ describe('Async actions', () => {
 
   describe('loginAction', () => {
     it('should dispatch "loginAction.pending", "redirectToRoute", "loginAction.fulfilled" when server response 200', async() => {
-      const fakeUser: AuthData = { login: 'test@test.ru', password: '123456' };
+      const fakeUser: AuthData = { login: 'test@test.ru', password: 'mtn123456' };
       const fakeServerReplay = { token: 'secret' };
       mockAxiosAdapter.onPost(APIRoute.Login).reply(200, fakeServerReplay);
 
@@ -182,8 +180,8 @@ describe('Async actions', () => {
 
       await store.dispatch(loginAction(fakeUser));
 
-      expect(mockSaveToken).toBeCalledTimes(1);
-      expect(mockSaveToken).toBeCalledWith(fakeServerReplay.token);
+      expect(mockSaveToken).toHaveBeenCalledTimes(1);
+      expect(mockSaveToken).toHaveBeenCalledWith(fakeServerReplay.token);
     });
 
   });
@@ -210,7 +208,7 @@ describe('Async actions', () => {
 
       await store.dispatch(logoutAction());
 
-      expect(mockDropToken).toBeCalledTimes(1);
+      expect(mockDropToken).toHaveBeenCalledTimes(1);
     });
   });
 });

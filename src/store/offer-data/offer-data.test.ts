@@ -15,10 +15,10 @@ describe('OfferData Slice', () => {
     };
 
     const result = offerData.reducer(initialStade, removeFavorite);
-    mockOffer['isFavorite'] = false
+    mockOffer['isFavorite'] = false;
 
     expect(result.offersList).toEqual([mockOffer]);
-  })
+  });
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState = {
@@ -100,7 +100,7 @@ describe('OfferData Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-//fetchOfferAction
+  //fetchOfferAction
   it('should set "isOffersDataLoading" to "true", "hasError" to "false" with "fetchOfferAction.pending"', () => {
     const expectedState = {
       offersList: [],
@@ -201,4 +201,4 @@ describe('OfferData Slice', () => {
 
     expect(result).toEqual(expectedState);
   });
-})
+});

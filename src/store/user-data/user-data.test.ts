@@ -56,5 +56,5 @@ describe('ReviewsData Slice', () => {
 
     expect(result).toEqual(expectedState);
   });
-  
-})
+
+});

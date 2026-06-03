@@ -32,7 +32,7 @@ describe('ReviewsData Slice', () => {
 
   //reviews
   it('should set "isLoading" to "true", "hasError" to "false" with "fetchReviewsAction.pending"', () => {
-     const expectedState = {
+    const expectedState = {
       reviews: [],
       isLoading: true,
       hasError: false,
@@ -74,10 +74,10 @@ describe('ReviewsData Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-//reviewAction
+  //reviewAction
 
- it('should set "isLoading" to "true", "hasError" to "false" with "reviewAction.pending"', () => {
-     const expectedState = {
+  it('should set "isLoading" to "true", "hasError" to "false" with "reviewAction.pending"', () => {
+    const expectedState = {
       reviews: [],
       isLoading: true,
       hasError: false,
@@ -119,5 +119,5 @@ describe('ReviewsData Slice', () => {
 
     expect(result).toEqual(expectedState);
   });
-  
-})
+
+});

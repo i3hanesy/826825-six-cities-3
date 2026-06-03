@@ -25,6 +25,7 @@ export type OfferData = {
 export type FavoriteData = {
   favoriteOffers: Offers;
   isFavoritesDataLoading: boolean;
+  hasError: boolean;
 }
 
 export type ReviewsData = {

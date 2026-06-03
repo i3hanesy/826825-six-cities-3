@@ -22,7 +22,6 @@ export const dataUser = createSlice({
         state.userData = action.payload;
       });
 
-      
   }
 });
 
