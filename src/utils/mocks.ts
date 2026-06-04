@@ -78,6 +78,6 @@ export const mockPostReview = {
   id: '1',
   comment: 'Test comment',
   rating: 4
-}
+};
 
 export const fakeReviews = Array.from({length: 5}, () => fakeReview());
