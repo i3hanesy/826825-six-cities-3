@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {NameSpace} from '../../const';
+import {NameSpace, FavoriteStatus} from '../../const';
 import {FavoriteData, FavoriteCange} from '../../types/state';
 import {
   fetchFavoriteOffersAction,
@@ -38,10 +38,10 @@ export const favoriteData = createSlice({
 
       .addCase(favoriteChangeAction.fulfilled, (state, action:PayloadAction<FavoriteCange>) => {
         switch (action.payload.favoriteStatus) {
-          case '1':
+          case FavoriteStatus.Addad:
             state.favoriteOffers.push(action.payload.data);
             break;
-          case '0':
+          case FavoriteStatus.Removed:
             state.favoriteOffers = state.favoriteOffers.filter(({id}) => id !== action.payload.data.id);
         }
       });

@@ -1,6 +1,7 @@
 import { favoriteData, dropFavoriteOffers } from './favorite-data';
 import { fetchFavoriteOffersAction, favoriteChangeAction } from '../api-actions';
 import { fakeOffers, fakeOffer } from '../../utils/mocks';
+import { FavoriteStatus } from '../../const';
 
 describe('OfferData Slice', () => {
   it('should return initial state with empty action', () => {
@@ -92,7 +93,7 @@ describe('OfferData Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should add favoriteOffer to favoriteOffers', () => {
+  it('should add favoriteOffer to favoriteOffers if favoriteStatus FavoriteStatus.Addad', () => {
     const mockOffer = fakeOffer();
     const expectedState = {
       favoriteOffers: [mockOffer],
@@ -103,7 +104,32 @@ describe('OfferData Slice', () => {
     const result = favoriteData.reducer(
       undefined,
       favoriteChangeAction.fulfilled(
-        {data:mockOffer, favoriteStatus: '1'}, '', {id: '1', favoriteStatus: '1'})
+        {data:mockOffer, favoriteStatus: FavoriteStatus.Addad}, '', {id: mockOffer.id, favoriteStatus: FavoriteStatus.Addad})
+    );
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should remove Offer from favoriteOffers if favoriteStatus FavoriteStatus.Removed', () => {
+    const mockOffer = fakeOffer();
+    const initialStade = {
+      favoriteOffers: [mockOffer],
+      isFavoritesDataLoading: false,
+      hasError: false,
+    };
+
+    const expectedState = {
+      favoriteOffers: [],
+      isFavoritesDataLoading: false,
+      hasError: false,
+    };
+
+    mockOffer['isFavorite'] = false;
+
+    const result = favoriteData.reducer(
+      initialStade,
+      favoriteChangeAction.fulfilled(
+        {data:mockOffer, favoriteStatus: FavoriteStatus.Removed}, '', {id: mockOffer.id, favoriteStatus: FavoriteStatus.Removed})
     );
 
     expect(result).toEqual(expectedState);
