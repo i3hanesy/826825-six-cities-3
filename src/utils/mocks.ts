@@ -1,10 +1,11 @@
-import {internet, datatype, name, address, image, lorem} from 'faker'
+import {internet, datatype, name, address, image, lorem} from 'faker';
 import { UserData } from '../types/user-data';
 import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { createAPI } from '../services/api';
 import { Offer } from '../types/offer';
 import { State } from '../types/state';
+import { AuthorizationStatus, SortTypes, DEFAUL_CITY } from '../const';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
@@ -81,3 +82,31 @@ export const mockPostReview = {
 };
 
 export const fakeReviews = Array.from({length: 5}, () => fakeReview());
+
+export const makeFakeStore = (initialState?: Partial<State>): State => ({
+  DATA: {
+    offersList: fakeOffers,
+    nearByOffer: fakeOffers,
+    currentOffer: null,
+    isOffersDataLoading: false,
+    hasError: false,
+  },
+  REVIEW: {
+    reviews: fakeReviews,
+    isLoading: false,
+    hasError: false,
+  },
+  USER: { authorizationStatus: AuthorizationStatus.NoAuth },
+  MAIN: {
+    currentCity: DEFAUL_CITY,
+    sortType: SortTypes.POPULAR,
+    mapCurrentOffer: '',
+  },
+  FAVORITES: {
+    favoriteOffers: fakeOffers,
+    isFavoritesDataLoading: false,
+    hasError: false,
+  },
+  DATA_USER: { userData: null },
+  ...initialState ?? {},
+});

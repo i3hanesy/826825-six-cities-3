@@ -12,7 +12,7 @@ const initialState: FavoriteData = {
 };
 
 export const favoriteData = createSlice({
-  name: NameSpace.Data,
+  name: NameSpace.Favorites,
   initialState,
   reducers: {
     dropFavoriteOffers: (state) => {

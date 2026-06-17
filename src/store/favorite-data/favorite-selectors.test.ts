@@ -7,6 +7,7 @@ describe('Favorites selectors',() => {
     [NameSpace.Favorites]: {
       favoriteOffers: fakeOffers,
       isFavoritesDataLoading: false,
+      hasError: false,
     }
   };
 

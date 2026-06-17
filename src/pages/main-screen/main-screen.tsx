@@ -21,7 +21,7 @@ function MainScreen(): JSX.Element {
   const currenSortType = useAppSelector(getSortType);
   const offersByCity = filterByCityOffers(offers, currentCity.name);
   const curretnOffers = sortOffers(offersByCity, currenSortType);
-  const placeCount:number = offersByCity.length;
+  const placeCount:number = curretnOffers.length;
 
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
