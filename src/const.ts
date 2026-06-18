@@ -1,5 +1,13 @@
 import { OfferCity } from './types/offer';
 
+export enum DataTestMarkups {
+  MainScreenContainer = 'main-screen-container',
+  CardTitleContainer = 'card-title-container',
+  LoginContainer = 'login-container',
+  FavoritesContainer = 'favorites-container',
+  OfferScreenContainer = 'offer-screen-container'
+}
+
 export const Setting = {
   maxRating: 5,
   ratingWidthModifier: 20,

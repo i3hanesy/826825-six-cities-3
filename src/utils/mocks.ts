@@ -62,7 +62,6 @@ export const fakeOffer = ():Offer => ({
   maxAdults: datatype.number(),
 });
 
-
 // export const fakeError = lorem.text();
 
 export const fakeOffers = Array.from({length: 6}, () => fakeOffer());

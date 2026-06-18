@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Helmet} from 'react-helmet-async';
 import {useParams} from 'react-router-dom';
-import {Setting, BemBlocks} from '../../const';
+import {Setting, BemBlocks, DataTestMarkups} from '../../const';
 import CardsList from '../../components/cards-list/cards-list';
 import Rating from '../../components/rating/rating';
 import Map from '../../components/map/map';
@@ -52,7 +52,7 @@ function OfferScreen(): JSX.Element | null {
       <Helmet>
         <title>6 cities: offer</title>
       </Helmet>
-      <main className="page__main page__main--offer">
+      <main className="page__main page__main--offer" data-testid={DataTestMarkups.OfferScreenContainer}>
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">

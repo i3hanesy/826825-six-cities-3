@@ -1,17 +1,18 @@
-import { render, screen } from '@testing-library/react';
-import NotFoundScreen from './not-found-screen';
+import CardTitle from './card-title';
+import { fakeOffer } from '../../utils/mocks';
 import { withHistory } from '../../utils/mock-component';
+import { render, screen } from '@testing-library/react';
+import { DataTestMarkups } from '../../const';
 
-describe('Component: NotFoundScreen', () => {
+describe('Component: Logo', () => {
+  const offer = fakeOffer();
   it('should render correctly', () => {
-    const expectedHeaderText = '404. Page not found';
-    const expectedText = 'К сожалению такой страницы не существует.';
-    const expectedLinkText = 'Вернуться на главную';
+    const expectedTitle = offer.title;
+    const preparedComponent = withHistory(<CardTitle offer = {offer}/>);
 
-    render(withHistory(<NotFoundScreen />));
+    render(preparedComponent);
 
-    expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
-    expect(screen.getByText(expectedText)).toBeInTheDocument();
-    expect(screen.getByText(expectedLinkText)).toBeInTheDocument();
+    expect(screen.getByTestId(DataTestMarkups.CardTitleContainer)).toBeInTheDocument();
+    expect(screen.getByText(expectedTitle)).toBeInTheDocument();
   });
 });

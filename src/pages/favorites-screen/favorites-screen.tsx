@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import classnames from 'classnames';
 import {Link} from 'react-router-dom';
 import CardsList from '../../components/cards-list/cards-list';
-import {BemBlocks, AppRoute} from '../../const';
+import {BemBlocks, AppRoute, DataTestMarkups} from '../../const';
 import { Offer, FavoritesByCity, Offers } from '../../types/offer';
 import FavoritesEmpty from './favorites-empty';
 
@@ -32,7 +32,7 @@ function FavoritesScreen() : JSX.Element {
       <Helmet>
         <title>6 cities: favorites</title>
       </Helmet>
-      <main className={classnames('page__main page__main--favorites', {'page__main--favorites-empty': isEmpty})}>
+      <main className={classnames('page__main page__main--favorites', {'page__main--favorites-empty': isEmpty})} data-testid={DataTestMarkups.FavoritesContainer}>
         <div className="page__favorites-container container">
           { isEmpty ?
             <FavoritesEmpty/> :

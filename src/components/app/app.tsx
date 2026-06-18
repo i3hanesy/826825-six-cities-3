@@ -10,63 +10,59 @@ import AuthScreen from '../../pages/auth-screen/auth-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
-        <Routes>
+      <Routes>
+        <Route
+          element={<MainLayout/>}
+        >
           <Route
-            element={<MainLayout/>}
-          >
-            <Route
-              path={AppRoute.Main}
-              element={
-                <MainScreen/>
-              }
-            />
-          </Route>
-          <Route
-            element={<Layout/>}
-          >
-            <Route
-              path={AppRoute.Offer}
-              element={
-                <OfferScreen/>
-              }
-            />
-          </Route>
-          <Route
-            element={<FavoritesLayout/>}
-          >
-            <Route
-              path={AppRoute.Favorites}
-              element = {
-                <PrivateRoute>
-                  <FavoritesScreen/>
-                </PrivateRoute>
-              }
-            />
-          </Route>
-          <Route
-            element={<Layout/>}
-          >
-            <Route
-              path="*"
-              element={<NotFoundScreen />}
-            />
-          </Route>
-          <Route
-            path={AppRoute.Login}
-            element = {
-              <AuthScreen/>
+            path={AppRoute.Main}
+            element={
+              <MainScreen/>
             }
           />
-        </Routes>
-      </HistoryRouter>
+        </Route>
+        <Route
+          element={<Layout/>}
+        >
+          <Route
+            path={AppRoute.Offer}
+            element={
+              <OfferScreen/>
+            }
+          />
+        </Route>
+        <Route
+          element={<FavoritesLayout/>}
+        >
+          <Route
+            path={AppRoute.Favorites}
+            element = {
+              <PrivateRoute>
+                <FavoritesScreen/>
+              </PrivateRoute>
+            }
+          />
+        </Route>
+        <Route
+          element={<Layout/>}
+        >
+          <Route
+            path="*"
+            element={<NotFoundScreen />}
+          />
+        </Route>
+        <Route
+          path={AppRoute.Login}
+          element = {
+            <AuthScreen/>
+          }
+        />
+      </Routes>
     </HelmetProvider>
   );
 }

@@ -11,7 +11,7 @@ import { getCurrentCity, getSortType} from '../../store/main-process/main-select
 import {getAuthCheckedStatus} from '../../store/user-process/user-selectors';
 import {getOffersDataLoadingStatus} from '../../store/offer-data/offer-selectors';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import {BemBlocks} from '../../const';
+import {BemBlocks, DataTestMarkups} from '../../const';
 import MainEmpty from './main-empty';
 import useOffers from '../../hooks/use-offers';
 
@@ -38,7 +38,7 @@ function MainScreen(): JSX.Element {
       <Helmet>
         <title>6 cities</title>
       </Helmet>
-      <main className={classnames('page__main page__main--index', {'page__main--index-empty': curretnOffers.length === 0})}>
+      <main className={classnames('page__main page__main--index', {'page__main--index-empty': curretnOffers.length === 0})} data-testid={DataTestMarkups.MainScreenContainer}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesTabs/>
         <div className="cities">

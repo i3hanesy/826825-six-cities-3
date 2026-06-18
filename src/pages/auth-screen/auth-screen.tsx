@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
 import { CITIES } from '../../const';
 import { changeCity } from '../../store/main-process/main-process';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, DataTestMarkups} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/user-selectors';
 
 function AuthScreen(): JSX.Element {
@@ -36,7 +36,7 @@ function AuthScreen(): JSX.Element {
 
   return (
 
-    <div className="page page--gray page--login" data-testid='login-container'>
+    <div className="page page--gray page--login" data-testid={DataTestMarkups.LoginContainer}>
       <Helmet>
         <title>6 cities: authorization</title>
       </Helmet>
